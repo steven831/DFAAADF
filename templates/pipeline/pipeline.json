@@ -1,0 +1,36 @@
+{
+	"name": "LS_ADLS_Shared",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"type": "AzureBlobFS",
+		"parameters": {
+			"namespaceName": {
+				"type": "String"
+			},
+			"clientId": {
+				"type": "String"
+			}
+		},
+		"typeProperties": {
+			"url": "https://app505dfrcusadlsg2.dfs.core.windows.net",
+			"servicePrincipalId": {
+				"value": "@linkedService().clientId",
+				"type": "Expression"
+			},
+			"servicePrincipalKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_AKV_VerticalKeyVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": {
+					"value": "@{linkedService().namespaceName}-appreg-appkey-kvs",
+					"type": "Expression"
+				}
+			},
+			"tenant": "289321e0-9db6-4644-b371-956e6056d9eb",
+			"subscriptionId": "0f1c414a-a389-47df-aab8-a351876ecd47"
+		},
+		"annotations": []
+	}
+}
